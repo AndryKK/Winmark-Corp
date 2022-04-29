@@ -1,5 +1,6 @@
+import classNames from "classnames";
 import React from "react";
-import { Photo } from "./Photo";
+import { Props } from "./Props";
 
 export function Header(
   { deleting, 
@@ -9,17 +10,7 @@ export function Header(
     setPhotos,
     photosCopy,
     setActualPage
-  }:
-  { deleting: boolean,
-    setDeleting: (a: boolean)=> void,
-    ids: number[],
-    photos: Photo[],
-    setPhotos: (a: Photo[])=> void,
-    photosCopy: Photo[],
-    setActualPage: (num: number) => void;
-    
-  }) {
-
+  }: Props) {
 
     const chosen =(event: React.ChangeEvent<HTMLSelectElement>)=> {
       setActualPage(1)
@@ -44,7 +35,10 @@ export function Header(
       </div>
       <button 
         onClick={()=> setDeleting(!deleting)}
-        className="App__header__button"
+        className={classNames(
+          "App__header__button",
+          {"App__header__button--pressed": deleting}
+        )}
       >
         Deleting
       </button>

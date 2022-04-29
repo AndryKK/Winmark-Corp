@@ -1,6 +1,7 @@
 import classNames from "classnames";
-import { Photo } from "./Photo";
-import cross from "../src/close.png"
+import cross from "../Gallery/close.png"
+import { Photo } from "../Types/Photo";
+import { Props } from "./Props";
 
 export function Galery(
   { photosP, 
@@ -9,31 +10,31 @@ export function Galery(
     photoId, 
     setPhotoId, 
     deleting,
-    OnDelete
-  }: {
-    photosP: Photo[];
-    setOpened: (a: boolean) => void;
-    opened: boolean; photoId: number;
-    setPhotoId: (a: number | null) => void;
-    deleting: boolean;
-    photosCopy: Photo[]
-    OnDelete: (id: number)=> void
-  }) {
+    onDelete
+  }: Props ) {
 
     return (
       <>
         <>
-          {photosP.map((photo: { id: number | null; thumbnailUrl: string | undefined; title: string | undefined; }) => 
-          <div key={photo.id}  className="App__main__photo__wrap">
-            <div onClick={() => { setOpened(!opened); setPhotoId(photo.id)}} className={classNames("App__main__photo", {"App__main__photo__shake": deleting})}>
-              <img src={photo.thumbnailUrl} alt={photo.title} />
-            </div>
+          {photosP.map((photo: Photo) => 
+            <div key={photo.id}  className="App__main__photo__wrap">
+              <div 
+                onClick={() => {
+                  setOpened(!opened); setPhotoId(photo.id)
+                }} 
+                className={classNames(
+                  "App__main__photo", 
+                  {"App__main__photo__shake": deleting}
+                )}
+              >
+                <img src={photo.thumbnailUrl} alt={photo.title} />
+              </div>
               {deleting && 
                 (<button  
                   className="App__main__photo__del"
                   onClick={() => {
                     if (photo.id) {
-                      OnDelete(photo.id)
+                      onDelete(photo.id)
                     }
                   }}
                   >
@@ -46,9 +47,15 @@ export function Galery(
         </>
         {opened && (
           <>
-            <div onClick={() => setOpened(false)} className="App__main__photo--background" />
+            <div 
+              onClick={() => setOpened(false)} 
+              className="App__main__photo--background"
+            />
               <div className="App__main__photo--cross__wrap">
-              <button  onClick={() => setOpened(false)} className="App__main__photo--cross">
+              <button
+                onClick={() => setOpened(false)}
+                className="App__main__photo--cross"
+              >
                 <img src={cross} alt="cross" />
               </button>
               <img

@@ -53,9 +53,15 @@
       border-radius: 10px;
       height: 50%;
       color: aliceblue;
+
       &:active {
         background-color: aliceblue;
         color: #6d6e71;
+      }
+
+      &--pressed {
+        background-color: rgb(198, 194, 194);
+        color: #232323;
       }
 
     }
@@ -119,6 +125,11 @@
         right: -50px;
         background-color: rgba(0, 0, 0, 0.0);
         border: 0;
+        transition-duration: 0.3s;
+
+        &:hover {
+          transform: scale(1.2);
+        }
         @media (max-height: 680px) {
           position: fixed;
           top: 10px;
