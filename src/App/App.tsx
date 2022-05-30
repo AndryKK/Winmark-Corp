@@ -30,7 +30,13 @@ function App() {
   };
 
   async function loading() {
-    const photos: Photo[] = await getData();
+    let photos: Photo[] = await getData();
+
+    photos = photos.map(x => x = 
+      { ...x, 
+        thumbnailUrl: "https://nextjourneys.com/wp-content/uploads/2017/07/4k-nature-wallpaper-images-Is-Cool-Wallpapers-150x150.jpg",
+        url: "https://nextjourneys.com/wp-content/uploads/2017/07/4k-nature-wallpaper-images-Is-Cool-Wallpapers-1024x640.jpg"}
+      )
 
     setPhotos(photos);
     setPhotosCopy(photos);
